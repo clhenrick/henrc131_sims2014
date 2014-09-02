@@ -2,17 +2,34 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    
+    ofSetVerticalSync(true);
+    
+    ofBackground(30,30,30);
+    
+    rect.setSrc(20, ofGetHeight() * 0.5f);
+    rect.setDst(ofGetWidth()*0.9, ofGetHeight()*0.9);
+    
+//    rect.pos.x = 0;
+//	rect.pos.y = 0;
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    
+    pct += 3.0f;
+    
+//    rect.update();
+    rect.updatePct(pct);
+    rect.updatePos(pct, 0.2f);
 
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
+    
+    rect.draw();
 }
 
 //--------------------------------------------------------------
