@@ -18,7 +18,11 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
-    pct += 3.0f;
+    pct += 30.0f;
+    
+    if (pct > ofGetWidth()) {
+        pct = 0;
+    }
     
 //    rect.update();
     rect.updatePct(pct);
