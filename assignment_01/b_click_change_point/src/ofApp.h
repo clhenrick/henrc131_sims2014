@@ -24,5 +24,5 @@ class ofApp : public ofBaseApp{
         float pct;
     
         // keep track of click
-        int count;
+        int toggle;
 };

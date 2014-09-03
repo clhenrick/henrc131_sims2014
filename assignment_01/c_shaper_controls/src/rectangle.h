@@ -17,7 +17,10 @@ public:
     void updatePct(float _pct); // number between 0 and 1
     void powUpdatePct(float _pct, float _shaper);
     void updatePos(float _x, float _y);
-    void reversePct(float _pct);
+    void changeSize(float w, float h);
+    
+    float h;
+    float w;
     
 private:
     

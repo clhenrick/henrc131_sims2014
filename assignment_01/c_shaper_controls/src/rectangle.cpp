@@ -7,6 +7,9 @@ rectangle::rectangle(){
     speedX = 5;
     speedY = 5.5;
     
+    w = 20;
+    h = 20;
+    
 }
 
 //------------------------------------------------------------------
@@ -31,11 +34,6 @@ void rectangle::updatePct(float _pct){
     //pos = dst * _pct + src * (1.0 - _pct);
 }
 
-void rectangle::reversePct(float _pct){
-    pos.x = dst.x * _pct * -1.0 + src.x * (1.0 - _pct);
-    pos.y = dst.y * _pct * -1.0 + src.y * (1.0 - _pct);
-}
-
 void rectangle::powUpdatePct(float _pct, float _shaper){
     float powPct = powf(_pct, _shaper);
     pos = dst * powPct + src * (1.0-powPct);
@@ -49,6 +47,10 @@ void rectangle::updatePos(float _x, float _y){
 void rectangle::draw() {
 	ofFill();
 	ofSetRectMode(OF_RECTMODE_CENTER); // center around the position
-    ofSetColor(198,246,55, 100);
-    ofRect(pos.x, pos.y, 20,20);
+    ofSetColor(198,246,55,100);
+    ofRect(pos.x, pos.y, w, h);
+}
+
+void rectangle::changeSize(float _w, float _h) {
+    ofRect(pos.x, pos.y, _w, _h);
 }

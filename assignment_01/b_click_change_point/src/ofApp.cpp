@@ -10,10 +10,7 @@ void ofApp::setup(){
     rect.setSrc(20, ofGetHeight() * 0.5f);
     rect.setDst(ofGetWidth()*0.9, ofGetHeight()*0.9);
     
-    count = 0;
-    
-    //    rect.pos.x = 0;
-    //	rect.pos.y = 0;
+    toggle = 0;
     
 }
 
@@ -24,9 +21,10 @@ void ofApp::update(){
     
     if (pct > ofGetWidth()) {
         pct = 0;
+    } else if (pct < 0) {
+        pct = ofGetWidth();
     }
     
-    //    rect.update();
     rect.updatePct(pct);
     rect.updatePos(pct, 0.1f);
     
@@ -60,14 +58,19 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-    cout << "mousePressed: " << x << ", " << y << " button: " << button << endl;
+    //cout << "mousePressed: " << x << ", " << y << " button: " << button << endl;
     
-    if (count == 0 && button == 0) {
+    if (toggle == 0 && button == 0) {
         rect.setSrc(x, y);
-        count = 1;
-    } else if (count == 1 && button == 0) {
-        rect.setDst(x, y);
-        count = 0;
+        toggle = 1;
+        if (pct <= 0){
+            rect.reversePct(pct);
+        }
+    } else if (toggle == 1 && button == 0) { // this part is not working...
+        rect.reversePct(pct);
+        rect.setSrc(x, y);
+        toggle = 0;
+        cout << "pct: " << pct << endl;
     }
     
 }
