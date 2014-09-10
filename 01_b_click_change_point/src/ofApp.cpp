@@ -5,11 +5,7 @@ void ofApp::setup(){
     
     ofSetVerticalSync(true);
     
-    ofBackground(30,30,30);
-    
-    rect.setSrc(20, ofGetHeight() * 0.5f);
-    rect.setDst(ofGetWidth()*0.9, ofGetHeight()*0.9);
-    
+    rect.init();
     toggle = 0;
     
 }
@@ -17,22 +13,19 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
-    pct += 30.0f;
+    pct += 0.01f;
     
-    if (pct > ofGetWidth()) {
-        pct = 0;
-    } else if (pct < 0) {
-        pct = ofGetWidth();
+    if (pct > 1.0f) {
+        pct = 0.0f;
     }
     
-    rect.updatePct(pct);
-    rect.updatePos(pct, 0.1f);
+    rect.powUpdatePct(pct, 0.3);
     
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    
+    ofBackground(30,30,30);
     rect.draw();
 }
 
@@ -60,24 +53,18 @@ void ofApp::mouseDragged(int x, int y, int button){
 void ofApp::mousePressed(int x, int y, int button){
     //cout << "mousePressed: " << x << ", " << y << " button: " << button << endl;
     
-    if (toggle == 0 && button == 0) {
-        rect.setSrc(x, y);
-        toggle = 1;
-        if (pct <= 0){
-            rect.reversePct(pct);
-        }
-    } else if (toggle == 1 && button == 0) { // this part is not working...
-        rect.reversePct(pct);
-        rect.setSrc(x, y);
-        toggle = 0;
-        cout << "pct: " << pct << endl;
-    }
-    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
     
+    if (toggle) {
+        rect.setSrc(x, y);
+        toggle = 0;
+    } else {
+        rect.setDst(x, y);
+        toggle = 1;
+    }
 }
 
 //--------------------------------------------------------------
